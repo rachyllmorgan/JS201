@@ -28,29 +28,32 @@ requirejs(
       console.log(family);
     });
 
-    function loadFamily(family) {
+// Display family members
+
+  function loadFamily(family) {
       require(['hbs!../templates/family_list'],            
         function(template) {
         $(".familyList").html(template(family));
       });
-    }
-  
+  }
+
+// Delete Members
   $(document).on("click", ".remove", function() {
     var deleteFam = $(this).siblings("h4").text();
     var memberKey = _.findKey(family.family, {"name": deleteFam});
     console.log("family", family);
-    
-    console.log("memberKey", memberKey);
-
 
     removeFam.delete(memberKey);
   });  
     
+// Add Member
   $(".addFamily").click(function(){
       console.log("click to add family");
-    event.preventDefault();
+       event.preventDefault();
 
     addFam.addFamily("family", family);
+
+    $(".addForm").get(0).reset();
 
   });
     
